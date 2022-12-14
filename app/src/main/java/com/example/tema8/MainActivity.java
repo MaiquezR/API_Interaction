@@ -32,14 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void LeerApi(){
-        String url = "https://digimon-api.vercel.app/api/digimon";
-
+        String url = "https://digimon-api.vercel.app/api/digimon/"+txtDigiName.getText().toString();
+        
         StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.get("name", txtDigiName.getText());
+                    jsonObject.get("level");
+                    jsonObject.get("img");
+
 
                     Toast.makeText(MainActivity.this, "El id insertado "+
                             jsonObject.getString("id"), Toast.LENGTH_SHORT).show();
