@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    txtDigiName.setText(jsonObject.getString("user"));
+                    jsonObject.get("name", txtDigiName.getText());
 
                     Toast.makeText(MainActivity.this, "El id insertado "+
                             jsonObject.getString("id"), Toast.LENGTH_SHORT).show();
@@ -52,15 +52,6 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("Error", error.getMessage());
             }
-        })
-        {
-            protected Map<String, String> getParams(){
-                Map<String, String> params = new HashMap<>();
-                params.put("title", title);
-                params.put("body", Body);
-                params.put("userId", User);
-                return params;
-            }
-        };
+        });
     }
 }
