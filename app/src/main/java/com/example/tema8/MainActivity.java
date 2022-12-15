@@ -2,8 +2,13 @@ package com.example.tema8;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,16 +16,19 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
-    TextView txtDigiName = findViewById(R.id.digi_txt);
 
+    public EditText txtDigiName;
+    public TextView txtDigiLevel;
+    public ImageView digi_icon;
 
 
     @Override
@@ -28,23 +36,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        txtDigiName = (EditText) findViewById(R.id.digiName);
+        txtDigiLevel = (TextView) findViewById(R.id.digi_level);
+        digi_icon = (ImageView) findViewById(R.id.digi_image);
+
+        digi_icon.setVisibility(View.INVISIBLE);
+
+        Button save_bt = findViewById(R.id.send_bt);
+        save_bt.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                String name = txtDigiName.getText().toString();
+                Toast.makeText(MainActivity.this, name , Toast.LENGTH_SHORT).show();
+                LeerApi(name);
+            }
+        });
+
+        Button god_mode_bt = findViewById(R.id.create_bt);
+        god_mode_bt.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DigiGodActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
-    private void LeerApi(){
-        String url = "https://digimon-api.vercel.app/api/digimon/"+txtDigiName.getText().toString();
+    private void LeerApi(String name){
+        String url = "https://digimon-api.vercel.app/api/digimon/name/"+name;
         
         StringRequest getRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.get("level");
-                    jsonObject.get("img");
+                    JSONArray jsonObject = new JSONArray(response);
+                    txtDigiLevel.setText(jsonObject.getJSONObject(0).getString("level")   );
 
+                    //Toast.makeText(MainActivity.this, jsonObject.getJSONObject(0).getString("level"), Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(MainActivity.this, "El id insertado "+
-                            jsonObject.getString("id"), Toast.LENGTH_SHORT).show();
+                    Picasso.with(MainActivity.this).load(jsonObject.getJSONObject(0).getString("img")).into(digi_icon);
+
+                    digi_icon.setVisibility(View.VISIBLE);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -55,5 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Error", error.getMessage());
             }
         });
+
+        Volley.newRequestQueue(this).add(getRequest);
     }
 }
