@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         txtDigiLevel = (TextView) findViewById(R.id.digi_level);
         digi_icon = (ImageView) findViewById(R.id.digi_image);
 
-        digi_icon.setVisibility(View.INVISIBLE);
 
         Button save_bt = findViewById(R.id.send_bt);
         save_bt.setOnClickListener(new View.OnClickListener(){
@@ -75,11 +74,14 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray jsonObject = new JSONArray(response);
                     txtDigiLevel.setText(jsonObject.getJSONObject(0).getString("level")   );
 
-                    //Toast.makeText(MainActivity.this, jsonObject.getJSONObject(0).getString("level"), Toast.LENGTH_SHORT).show();
+                    String img_url = jsonObject.getJSONObject(0).getString("img");
 
-                    Picasso.with(MainActivity.this).load(jsonObject.getJSONObject(0).getString("img")).into(digi_icon);
+                    Toast.makeText(MainActivity.this, img_url, Toast.LENGTH_SHORT).show();
 
-                    digi_icon.setVisibility(View.VISIBLE);
+
+
+                    Picasso.with(MainActivity.this).load("https://digimon.shadowsmith.com/img/agumon.jpg").into(digi_icon);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

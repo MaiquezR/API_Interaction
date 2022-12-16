@@ -8,75 +8,45 @@
     android:hapticFeedbackEnabled="false"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="571dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/send_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_width="117dp"
+        android:layout_height="58dp"
         android:layout_marginEnd="62dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:text="Enviar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/create_bt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/create_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="55dp"
         android:layout_marginStart="62dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="16dp"
         android:text="Crear"
         android:textColor="#E1BEE7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/send_bt" />
-
-    <ImageView
-        android:id="@+id/digi_image"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="141dp"
-        android:layout_marginTop="301dp"
-        android:layout_marginEnd="270dp"
-        android:layout_marginBottom="430dp"
-        android:contentDescription="TODO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.884"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.961" />
 
     <TextView
         android:id="@+id/digi_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="114dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="138dp"
+        android:layout_height="31dp"
         android:text="Nivel"
+        android:textAlignment="center"
         android:textColor="#D53232"
-        app:layout_constraintBottom_toTopOf="@+id/digi_image"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.372" />
 
     <EditText
         android:id="@+id/digiName"
@@ -85,9 +55,27 @@
         android:ems="10"
         android:hint="Digimon"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="#D53232"
         android:textColorHint="#D53232"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="35dp" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.104" />
+
+    <ImageView
+        android:id="@+id/digi_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
