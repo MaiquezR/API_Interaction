@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,9 +21,9 @@ import java.util.Map;
 
 public class DigiGodActivity extends AppCompatActivity {
 
-    TextView txtDigiId = findViewById(R.id.digi_id_new);
-    TextView txtDigiName= findViewById(R.id.digi_name_new);
-    TextView txtDigiLevel = findViewById(R.id.digi_level_new);
+    public EditText txtDigiId;
+    public EditText txtDigiName;
+    public EditText txtDigiLevel;
 
 
 
@@ -32,6 +31,10 @@ public class DigiGodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_digi_god);
+
+        txtDigiId = findViewById(R.id.digi_id_new);
+        txtDigiName= findViewById(R.id.digi_name_new);
+        txtDigiLevel = findViewById(R.id.digi_level_new);
 
         Button send_bt = findViewById(R.id.save_digimon_bt);
         Button search_bt = findViewById(R.id.search_activity_bt);
