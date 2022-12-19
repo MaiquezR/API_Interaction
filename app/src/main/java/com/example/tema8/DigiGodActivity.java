@@ -13,11 +13,14 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DigiGodActivity extends AppCompatActivity {
-/*
-    TextView txtDigiName = findViewById(R.id.digi_name_search);
-    TextView txtDigiLevel = findViewById(R.id.digi_name_search);
-    TextView txtDigiStory = findViewById(R.id.digi_name_search);
+
+    TextView txtDigiName = findViewById(R.id.digi_id_new);
+    TextView txtDigiLevel = findViewById(R.id.digi_name_new);
+    TextView txtDigiStory = findViewById(R.id.digi_level_new);
 
 
     @Override
@@ -51,5 +54,5 @@ public class DigiGodActivity extends AppCompatActivity {
                 return params;
             }
         };
-    }*/
+    }
 }

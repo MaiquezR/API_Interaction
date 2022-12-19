@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         txtDigiLevel = (TextView) findViewById(R.id.digi_level);
         digi_icon = (ImageView) findViewById(R.id.digi_image);
 
+        digi_icon.setVisibility(View.INVISIBLE);
 
         Button save_bt = findViewById(R.id.send_bt);
         save_bt.setOnClickListener(new View.OnClickListener(){
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = txtDigiName.getText().toString();
-                Toast.makeText(MainActivity.this, name , Toast.LENGTH_SHORT).show();
                 LeerApi(name);
             }
         });
@@ -72,17 +72,12 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONArray jsonObject = new JSONArray(response);
-                    txtDigiLevel.setText(jsonObject.getJSONObject(0).getString("level")   );
 
+                    txtDigiLevel.setText(jsonObject.getJSONObject(0).getString("level")   );
                     String img_url = jsonObject.getJSONObject(0).getString("img");
 
-                    Toast.makeText(MainActivity.this, img_url, Toast.LENGTH_SHORT).show();
-
-
-
-                    Picasso.with(MainActivity.this).load("https://digimon.shadowsmith.com/img/agumon.jpg").into(digi_icon);
-
-
+                    Picasso.with(MainActivity.this).load(img_url).into(digi_icon);
+                    digi_icon.setVisibility(View.VISIBLE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -90,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Error", error.getMessage());
-            }
+                Toast.makeText(MainActivity.this, "Digimon no encontrado, compruebe los datos",
+                        Toast.LENGTH_SHORT).show();            }
         });
 
         Volley.newRequestQueue(this).add(getRequest);
