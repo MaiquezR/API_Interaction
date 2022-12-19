@@ -8,7 +8,7 @@
     tools:context=".DigiGodActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/save_digimon_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteY="665dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/search_activity_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buscar"
@@ -25,41 +25,43 @@
 
     <LinearLayout
         android:layout_width="404dp"
-        android:layout_height="614dp"
+        android:layout_height="482dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="16dp">
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/digi_id_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="ID"
             android:inputType="textPersonName"
-            android:text="Nombre"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textAllCaps="true"
+            android:textColor="#F44336"
+            android:textColorHint="#F44336" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/digi_name_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Nombre"
             android:inputType="textPersonName"
-            android:text="Nivel"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textAllCaps="true"
+            android:textColor="#F44336"
+            android:textColorHint="#F44336" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/digi_level_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="start|top"
+            android:hint="Nivel"
             android:inputType="textMultiLine"
-            android:text="Historia"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textColor="#F44336"
+            android:textColorHint="#F44336" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

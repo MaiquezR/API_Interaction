@@ -82,12 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "Digimon no encontrado, compruebe los datos",
-                        Toast.LENGTH_SHORT).show();            }
-        });
+        }, error -> Toast.makeText(MainActivity.this, "Digimon no encontrado, compruebe los datos",
+                Toast.LENGTH_SHORT).show());
 
         Volley.newRequestQueue(this).add(getRequest);
     }
