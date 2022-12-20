@@ -7,9 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -26,14 +30,13 @@ public class DigiGodActivity extends AppCompatActivity {
     public EditText txtDigiLevel;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_digi_god);
 
         txtDigiId = findViewById(R.id.digi_id_new);
-        txtDigiName= findViewById(R.id.digi_name_new);
+        txtDigiName = findViewById(R.id.digi_name_new);
         txtDigiLevel = findViewById(R.id.digi_level_new);
 
         Button send_bt = findViewById(R.id.save_digimon_bt);
@@ -42,7 +45,7 @@ public class DigiGodActivity extends AppCompatActivity {
         send_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EscribeApi();
+                saveDigimon(txtDigiId, txtDigiName, txtDigiLevel);
             }
         });
 
@@ -55,33 +58,28 @@ public class DigiGodActivity extends AppCompatActivity {
         });
     }
 
-    private void EscribeApi(){
-        String url = "https://jsonplaceholder.typicode.com/posts/1";
+    private void saveDigimon(EditText id, EditText title, EditText body) {
+        String url = "https://jsonplaceholder.typicode.com/posts";
 
-        StringRequest getRequest = new StringRequest(Request.Method.GET, url, response -> {
-            try {
-                JSONObject jsonObject = new JSONObject();
-                txtDigiId.setText(jsonObject.getString("id"));
-                txtDigiName.setText(jsonObject.getString("title"));
-                txtDigiLevel.setText(jsonObject.getString("body"));
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id.getText().toString());
+        params.put("title", title.getText().toString());
+        params.put("body", body.getText().toString());
 
-                Toast.makeText(DigiGodActivity.this, "Digimon "+jsonObject.getString("id")+" Guardado", Toast.LENGTH_SHORT).show();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(DigiGodActivity.this, "Digimon Guardado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DigiGodActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
             }
-        }, error -> Toast.makeText(DigiGodActivity.this, "Digimon no registrado",
-                Toast.LENGTH_SHORT).show())
-        {
-            protected Map<String, String> getParams(){
-                Map<String, String> params = new HashMap<>();
-                params.put("id", txtDigiId.getText().toString());
-                params.put("title", txtDigiName.getText().toString());
-                params.put("body", txtDigiLevel.getText().toString());
-                return params;
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(DigiGodActivity.this, "No se ha registrado el Digimon", Toast.LENGTH_SHORT).show();
             }
-        };
+        }
+        );
 
-        Volley.newRequestQueue(this).add(getRequest);
+        Volley.newRequestQueue(this).add(jsonRequest);
     }
 }
